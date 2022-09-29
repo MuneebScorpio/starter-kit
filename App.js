@@ -3,8 +3,10 @@ import {StyleSheet} from 'react-native';
 import {
   ViroARScene,
   ViroText,
-  ViroConstants,
+  ViroTrackingStateConstants,
   ViroARSceneNavigator,
+  Viro360Image,
+  Viro3DObject,
 } from '@viro-community/react-viro';
 
 const HelloWorldSceneAR = () => {
@@ -12,9 +14,9 @@ const HelloWorldSceneAR = () => {
 
   function onInitialized(state, reason) {
     console.log('guncelleme', state, reason);
-    if (state === ViroConstants.TRACKING_NORMAL) {
-      setText('Hello World!');
-    } else if (state === ViroConstants.TRACKING_NONE) {
+    if (state === ViroTrackingStateConstants.TRACKING_NORMAL) {
+      setText('Testing!');
+    } else if (state === ViroTrackingStateConstants.TRACKING_NONE) {
       // Handle loss of tracking
     }
   }
@@ -23,9 +25,14 @@ const HelloWorldSceneAR = () => {
     <ViroARScene onTrackingUpdated={onInitialized}>
       <ViroText
         text={text}
-        scale={[0.5, 0.5, 0.5]}
-        position={[0, 0, -1]}
+        scale={[0.1, 0.1, 0.1]}
+        // position={[0, -0.1, -1]}
         style={styles.helloWorldTextStyle}
+      />
+      <Viro360Image
+        source={require('./assets/cover.jpg')}
+        rotation={[0, 45, 0]}
+        format="RGBA8"
       />
     </ViroARScene>
   );
